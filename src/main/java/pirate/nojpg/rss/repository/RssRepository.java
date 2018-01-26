@@ -22,14 +22,7 @@ public class RssRepository {
     @Autowired
     private ListableBeanFactory beanFactory;
     private Repositories repositories;
-
-    public ListableBeanFactory getBeanFactory() {
-        return beanFactory;
-    }
-
-    public void setBeanFactory(ListableBeanFactory beanFactory) {
-        this.beanFactory = beanFactory;
-    }
+    
 
     @PostConstruct
     public void setRepositories() {
