@@ -1,0 +1,11 @@
+spring:
+  jpa:
+    properties:
+      hibernate: org.hibernate.dialect.H2Dialect
+      enable_lazy_load_no_trans: true
+      current_session_context_class: thread
+      ddl-auto: create-drop
+  h2:
+    console:
+      enabled: true
+      path: /h2

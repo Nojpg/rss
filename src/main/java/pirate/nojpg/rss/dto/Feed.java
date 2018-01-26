@@ -3,36 +3,25 @@ package pirate.nojpg.rss.dto;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.Transient;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "")
-@ToString
+@Table(name = "Feed")
+@ToString(exclude = "feedMessages")
 @AllArgsConstructor
+@Access(AccessType.FIELD)
 public class Feed extends Domain{
-    @Column(name = "")
+    @Column(name = "title")
     private String title;
-//    @Column(name = "")
-//    private Date date;
-    @Column(name = "")
+    @Column(name = "description")
     private String description;
-    @Column(name = "")
+    @Column(name = "link")
     private String link;
-    @Transient
-    private List<FeedMessage> feedMessages = new ArrayList<>();
-
-    public Feed(String title, String description, String link) {
-        this.title = title;
-        this.description = description;
-        this.link = link;
-    }
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "feed", fetch = FetchType.LAZY)
+    private Set<FeedMessage> feedMessages = new HashSet<>();
 }
