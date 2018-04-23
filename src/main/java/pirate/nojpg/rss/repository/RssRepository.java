@@ -19,15 +19,18 @@ import java.util.Optional;
 @Transactional
 public class RssRepository {
 
-    @Autowired
-    private ListableBeanFactory beanFactory;
+//    @Autowired
+//    private ListableBeanFactory beanFactory;
     private Repositories repositories;
-    
 
-    @PostConstruct
-    public void setRepositories() {
-        repositories = new Repositories(beanFactory);
+    public RssRepository(@Autowired ListableBeanFactory beanFactory) {
+        this.repositories = new Repositories(beanFactory);
     }
+
+//    @PostConstruct
+//    public void setRepositories() {
+//        repositories = new Repositories(beanFactory);
+//    }
 
     public JpaRepository getRepository(Class clazz) {
         return Optional.ofNullable((JpaRepository) repositories.getRepositoryFor(clazz))
